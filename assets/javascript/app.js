@@ -3,7 +3,6 @@
 
 
 
-
 function displayRestaurant() {
     for (var i = 0; i <= 11; i++) {
         var outerDiv = $("<div>");
@@ -104,9 +103,9 @@ function displayRestaurant() {
 displayRestaurant();
 
 $( document ).ready(function() {
-
+//global variables for openweather api
 var apiKey = "d593e2d9c9a4edb4bda4173346b7b4e7";
-var city = "";
+var city = "New Brunswick";
 var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",Burundi&units=imperial&appid=" + apiKey;
 var queryUrl2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",Burundi&units=imperial&appid=" + apiKey;
 $.ajax({
@@ -117,10 +116,12 @@ $.ajax({
   .then(function(response) {
     console.log(response)
 
+    $("#todaysWeather").html(response.main.temp + " Degrees")
+    console.log(response.main.temp)
 
 
 
-  })
+  });
 
   $.ajax({
     url: queryUrl2,
@@ -129,11 +130,17 @@ $.ajax({
 
   .then(function(response) {
     console.log(response)
+    $("#day1").html(response.list[4].main.temp + " Degrees " + response.list[4].weather[0].main )
+    $("#day2").html(response.list[12].main.temp + " Degrees " + response.list[12].weather[0].main )
+    $("#day3").html(response.list[20].main.temp + " Degrees " + response.list[20].weather[0].main )
+    $("#day4").html(response.list[28].main.temp + " Degrees " + response.list[28].weather[0].main )
+    $("#day5").html(response.list[36].main.temp + " Degrees " + response.list[36].weather[0].main )
+    
+    
+    
 
 
-
-
-  })
+  });
 
 
 

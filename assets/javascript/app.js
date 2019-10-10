@@ -14,9 +14,12 @@ function getCategories() {
   }).then(function (response) {
     catResponse = response.categories;
     console.log(catResponse);
+    $('#searchCategory')
+        .append($('<option value="0">', 'Select Category')
+          .text('Select Category'));
     for (var i = 0; i < catResponse.length; i++) {
       $('#searchCategory')
-        .append($('<option>', catResponse[i].categories.name)
+        .append($('<option value="'+catResponse[i].categories.id+'">', catResponse[i].categories.name)
           .text(catResponse[i].categories.name));
     }
   });
@@ -46,9 +49,11 @@ function displayRestaurant() {
     var divCol5TextUppercase = $("<div>");
     var pCousines = $("<p>");
     var pCostForTwo = $("<p>");
+    var pOutdoors = $("<p>");
     var divCol7TextUppercase = $("<div>");
     var pCousinesData = $("<p>");
     var pCostForTwoData = $("<p>");
+    var pOutdoorsData = $("<p>");
     var hr2 = $("<hr>");
     var divRowTextCenterNoguttersPb3 = $("<div>");
     var divCol6 = $("<div>");
@@ -76,9 +81,11 @@ function displayRestaurant() {
     divCol5TextUppercase.addClass("col-5 text-uppercase");
     pCousines.text("cousines :");
     pCostForTwo.text("cost for two :");
+    pOutdoors.text("outdoor seating :");
     divCol7TextUppercase.addClass("col-7 text-uppercase");
     pCousinesData.text("Chinese");
     pCostForTwoData.text("$ 25");
+    pOutdoorsData.text("Yes");
     divRowTextCenterNoguttersPb3.addClass("row text-center no-gutters pb-3");
     divCol6.addClass("col-6");
     aMenu.attr("href", "https://wwww.google.com")
@@ -108,9 +115,11 @@ function displayRestaurant() {
     divCard2.append(hr)
     divCol5TextUppercase.append(pCousines);
     divCol5TextUppercase.append(pCostForTwo);
+    divCol5TextUppercase.append(pOutdoors);
     divRowPy3Ml1.append(divCol5TextUppercase);
     divCol7TextUppercase.append(pCousinesData);
     divCol7TextUppercase.append(pCostForTwoData);
+    divCol7TextUppercase.append(pOutdoorsData);
     divRowPy3Ml1.append(divCol7TextUppercase);
     divCard2.append(divRowPy3Ml1);
     divCard2.append(hr2);
@@ -136,6 +145,8 @@ $(document).ready(function () {
     //global variables for openweather api
     var apiKey = "d593e2d9c9a4edb4bda4173346b7b4e7";
     var city = searchCity.value.toLowerCase();
+    var selectedCategory = searchCategory.value
+    console.log(selectedCategory);
     console.log(city)
     var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",Burundi&units=imperial&appid=" + apiKey;
     var queryUrl2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",Burundi&units=imperial&appid=" + apiKey;

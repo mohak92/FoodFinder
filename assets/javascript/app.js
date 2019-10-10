@@ -129,6 +129,7 @@ displayRestaurant();
 
 $(document).ready(function () {
   getCategories();
+  $("#weather").hide();
   searchForm.addEventListener("submit", event => {
     event.preventDefault();
 
@@ -168,6 +169,8 @@ $(document).ready(function () {
         $("#day5").html(response.list[36].main.temp + " Degrees " + response.list[36].weather[0].main)
 
       });
+
+      $("#weather").show();
 
   })
 });

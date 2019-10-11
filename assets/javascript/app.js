@@ -1,6 +1,9 @@
 
 var apiKey = "0490112252c7a9dead536c20b8c14c10";
-var catResponse;
+var apiKeyWeather = "d593e2d9c9a4edb4bda4173346b7b4e7";
+var city;
+var selectedCategory;
+var loader = document.querySelector(".loader");
 function getCategories() {
   const categoryURL = `https://developers.zomato.com/api/v2.1/categories`;
   $.ajax({
@@ -13,21 +16,87 @@ function getCategories() {
 
   }).then(function (response) {
     catResponse = response.categories;
-    console.log(catResponse);
     $('#searchCategory')
-        .append($('<option value="0">', 'Select Category')
-          .text('Select Category'));
+      .append($('<option value="0">', 'Select Category')
+        .text('Select Category'));
     for (var i = 0; i < catResponse.length; i++) {
       $('#searchCategory')
-        .append($('<option value="'+catResponse[i].categories.id+'">', catResponse[i].categories.name)
+        .append($('<option value="' + catResponse[i].categories.id + '">', catResponse[i].categories.name)
           .text(catResponse[i].categories.name));
     }
   });
 }
 
+function getCityData(city) {
+  const cityURL = "https://developers.zomato.com/api/v2.1/cities?q=" + city;
+  $.ajax({
+    headers: {
+      "user-key": this.apiKey,
+      "Content-Type": "application/json"
+    },
+    url: cityURL,
+    method: "GET",
+    success: function (data) {
+      callback(data);
+    }
+  });
+}
+
+var cityID;
+function callback(response) {
+  console.log(response.location_suggestions.length);
+  if(response.location_suggestions.length === 0){
+    cityID = 0;
+  } else {
+    cityID = response.location_suggestions[0].id;
+  }
+  console.log(cityID);
+  console.log(city);
+  if (cityID === 0) {
+    console.log("Enter valid city");
+    showFeedback("Please enter a valid city !");
+  } else {
+    showLoader();
+    var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",Burundi&units=imperial&appid=" + apiKeyWeather;
+    var queryUrl2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",Burundi&units=imperial&appid=" + apiKeyWeather;
+
+    $.ajax({
+      url: queryUrl,
+      method: "GET"
+    })
+
+      .then(function (response) {
+        //console.log(response)
+
+        $("#todaysWeather").html(response.main.temp + " Degrees")
+        //console.log(response.main.temp)
+
+
+
+      });
+
+    $.ajax({
+      url: queryUrl2,
+      method: "GET"
+    })
+
+      .then(function (response) {
+        //console.log(response)
+        $("#day1").html(response.list[4].main.temp + " Degrees " + response.list[4].weather[0].main)
+        $("#day2").html(response.list[12].main.temp + " Degrees " + response.list[12].weather[0].main)
+        $("#day3").html(response.list[20].main.temp + " Degrees " + response.list[20].weather[0].main)
+        $("#day4").html(response.list[28].main.temp + " Degrees " + response.list[28].weather[0].main)
+        $("#day5").html(response.list[36].main.temp + " Degrees " + response.list[36].weather[0].main)
+
+      });
+
+    $("#weather").show();
+    getRestaurandInfo();
+  }
+}
 
 function getRestaurandInfo() {
-
+  hideLoader();
 }
 
 
@@ -136,6 +205,23 @@ function displayRestaurant() {
 
 displayRestaurant();
 
+function showFeedback(text) {
+  const feedback = document.querySelector(".feedback");
+  feedback.classList.add("showItem");
+  feedback.innerHTML = `<p>${text}</p>`;
+  setTimeout(() => {
+    feedback.classList.remove("showItem");
+  }, 3000);
+}
+
+function showLoader() {
+  this.loader.classList.add("showItem");
+}
+
+function hideLoader() {
+  this.loader.classList.remove("showItem");
+}
+
 $(document).ready(function () {
   getCategories();
   $("#weather").hide();
@@ -143,46 +229,16 @@ $(document).ready(function () {
     event.preventDefault();
 
     //global variables for openweather api
-    var apiKey = "d593e2d9c9a4edb4bda4173346b7b4e7";
-    var city = searchCity.value.toLowerCase();
-    var selectedCategory = searchCategory.value
+    city = searchCity.value.toLowerCase();
+    selectedCategory = parseInt(searchCategory.value);
     console.log(selectedCategory);
     console.log(city)
-    var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",Burundi&units=imperial&appid=" + apiKey;
-    var queryUrl2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",Burundi&units=imperial&appid=" + apiKey;
-
-    $.ajax({
-      url: queryUrl,
-      method: "GET"
-    })
-
-      .then(function (response) {
-        //console.log(response)
-
-        $("#todaysWeather").html(response.main.temp + " Degrees")
-        //console.log(response.main.temp)
-
-
-
-      });
-
-    $.ajax({
-      url: queryUrl2,
-      method: "GET"
-    })
-
-      .then(function (response) {
-        //console.log(response)
-        $("#day1").html(response.list[4].main.temp + " Degrees " + response.list[4].weather[0].main)
-        $("#day2").html(response.list[12].main.temp + " Degrees " + response.list[12].weather[0].main)
-        $("#day3").html(response.list[20].main.temp + " Degrees " + response.list[20].weather[0].main)
-        $("#day4").html(response.list[28].main.temp + " Degrees " + response.list[28].weather[0].main)
-        $("#day5").html(response.list[36].main.temp + " Degrees " + response.list[36].weather[0].main)
-
-      });
-
-      $("#weather").show();
-
+    if (city === "" || selectedCategory === 0) {
+      console.log("show error");
+      showFeedback("please enter a city and select category");
+    } else {
+      getCityData(city);
+    }
   })
 });
 

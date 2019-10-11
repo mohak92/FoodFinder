@@ -2,6 +2,7 @@
 var apiKey = "0490112252c7a9dead536c20b8c14c10";
 var apiKeyWeather = "d593e2d9c9a4edb4bda4173346b7b4e7";
 var city;
+var selectedCategory;
 var loader = document.querySelector(".loader");
 function getCategories() {
   const categoryURL = `https://developers.zomato.com/api/v2.1/categories`;
@@ -229,7 +230,7 @@ $(document).ready(function () {
 
     //global variables for openweather api
     city = searchCity.value.toLowerCase();
-    var selectedCategory = parseInt(searchCategory.value);
+    selectedCategory = parseInt(searchCategory.value);
     console.log(selectedCategory);
     console.log(city)
     if (city === "" || selectedCategory === 0) {

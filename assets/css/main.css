@@ -1,3 +1,10 @@
+.backgroundimg {
+
+  background-image: url(../images/backimage.jpeg);
+  height: 500px;
+}
+
+
 :root {
   --mainWhite: #f5f5f5;
   --mainDark: #333333;

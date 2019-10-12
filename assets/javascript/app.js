@@ -111,6 +111,7 @@ function getRestaurandInfo(cityID, categories) {
     var restResult = response.restaurants;
     console.log(restResult);
     displayRestaurant(restResult);
+    hideLoader();
   });
 }
 
@@ -153,12 +154,12 @@ function getRestaurandInfo(cityID, categories) {
       divRowP3.addClass("row p-3");
       divCol5.addClass("col-5");
       myImg.addClass("mg-fluid img-thumbnail");
-      myImg.attr("src", "url");
+      myImg.attr("src", result[i].restaurant.thumb);
       myImg.attr("alt", "");
       divCol5TextCap.addClass("col-5 text-capitalize");
       h6.addClass("text-uppercase pt-2 redText");
       h6.text(result[i].restaurant.name);
-      pAddresss.text("address");
+      pAddresss.text(result[i].restaurant.location.address);
       divCol1.addClass("col-1");
       divBadgeBadgeSuccess.addClass("badge badge-success");
       divRowPy3Ml1.addClass("row py-3 ml-1");
@@ -167,18 +168,22 @@ function getRestaurandInfo(cityID, categories) {
       pCostForTwo.text("cost for two :");
       pOutdoors.text("outdoor seating :");
       divCol7TextUppercase.addClass("col-7 text-uppercase");
-      pCousinesData.text("Chinese");
-      pCostForTwoData.text("$ 25");
-      pOutdoorsData.text("Yes");
+      pCousinesData.text(result[i].restaurant.cuisines);
+      pCostForTwoData.text(result[i].restaurant.currency + " " + result[i].restaurant.average_cost_for_two);
+      if(result[i].restaurant.highlights.includes("Outdoor Seating")){
+        pOutdoorsData.text("Yes");
+      } else {
+        pOutdoorsData.text("No");
+      }
       divRowTextCenterNoguttersPb3.addClass("row text-center no-gutters pb-3");
       divCol6.addClass("col-6");
-      aMenu.attr("href", "https://wwww.google.com")
+      aMenu.attr("href", result[i].restaurant.menu_url)
       aMenu.attr("target", "_blank")
       aMenu.addClass("btn redBtn  text-uppercase");
       iMenu.addClass("fas fa-book");
       aMenu.text("Menu");
       divCol6_2.addClass("col-6");
-      aWebsite.attr("href", "https://wwww.google.com")
+      aWebsite.attr("href", result[i].restaurant.url)
       aWebsite.attr("target", "_blank")
       aWebsite.addClass("btn redBtn  text-uppercase");
       iWebsite.addClass("fas fa-book");
@@ -192,7 +197,7 @@ function getRestaurandInfo(cityID, categories) {
       divRowP3.append(divCol5)
       divRowP3.append(divCol5TextCap);
       divBadgeBadgeSuccess.append();
-      divBadgeBadgeSuccess.append("4.9");
+      divBadgeBadgeSuccess.append(result[i].restaurant.user_rating.aggregate_rating);
       divCol1.append(divBadgeBadgeSuccess);
       divRowP3.append(divCol1);
       divCard2.append(divRowP3);

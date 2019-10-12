@@ -114,7 +114,6 @@ function getRestaurandInfo(cityID, categories) {
   });
 }
 
-
   function displayRestaurant(result) {
     for (var i = 0; i <= result.length; i++) {
       var outerDiv = $("<div>");

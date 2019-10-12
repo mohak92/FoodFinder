@@ -11,7 +11,7 @@
   --mainRed: #c92332;
 }
 body {
-  background: var(--mainWhite);
+  background: rgb(150, 15, 15);
   color: var(--mainDark);
 }
 .redBtn {

@@ -108,13 +108,15 @@ function getRestaurandInfo(cityID, categories) {
     method: "GET"
 
   }).then(function (response) {
-    console.log(response)
+    var restResult = response.restaurants;
+    console.log(restResult);
+    displayRestaurant(restResult);
   });
 }
 
 
-  function displayRestaurant() {
-    for (var i = 0; i <= 11; i++) {
+  function displayRestaurant(result) {  
+    for (var i = 0; i <= result.length; i++) {
       var outerDiv = $("<div>");
       var divCard1 = $("<div>");
       var divCard2 = $("<div>");
@@ -155,7 +157,7 @@ function getRestaurandInfo(cityID, categories) {
       myImg.attr("alt", "");
       divCol5TextCap.addClass("col-5 text-capitalize");
       h6.addClass("text-uppercase pt-2 redText");
-      h6.text("name");
+      h6.text(result[i].restaurant.name);
       pAddresss.text("address");
       divCol1.addClass("col-1");
       divBadgeBadgeSuccess.addClass("badge badge-success");
@@ -215,8 +217,6 @@ function getRestaurandInfo(cityID, categories) {
       $("#restaurant-list").append(outerDiv);
     }
   }
-
-  displayRestaurant();
 
   function showFeedback(text) {
     const feedback = document.querySelector(".feedback");

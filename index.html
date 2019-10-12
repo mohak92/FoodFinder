@@ -21,40 +21,42 @@
 
 <body>
     <div class="backgroundimg">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                
-                
-                <!--Hanna your logo goes here-->
-                <br>
-                <img src="assets/images/foodmood3.png" class="d-block mx-auto" alt="">
-                <br><br>
-                
-                <div class="feedback alert alert-danger text-center text-capitalize">please enter city</div>
-                <form id="searchForm" class="my-4">
+        <div class="container">
+            <div class="row">
+                <div class="col">
 
-                    <!-- form group -->
-                    <div class="form-group my-3">
-                        <select class="custom-select text-capitalize" id="searchCategory">
+                    <!--Hanna your logo goes here-->
+                    <br>
+                    <img src="assets/images/foodmood3.png" class="d-block mx-auto" alt="">
+                    <br><br>
+
+                    <div class="feedback alert alert-danger text-center text-capitalize">please enter city</div>
+                    <form id="searchForm" class="my-4">
+
+                        <!-- form group -->
+                        <div class="form-group my-3">
+                            <select class="custom-select text-capitalize" id="searchCategory">
 
 
-                        </select>
-                    </div>
-                    <!-- end of form group -->
-
-                    <!-- input group -->
-                    <div class="input-group">
-                        <input type="text" class="form-control text-capitalize" id="searchCity"
-                            placeholder="enter city....">
-                        <div class="input-group-append">
-                            <button type="submit" id="searchBtn" class="btn redBtn text-capitalize">search</button>
+                            </select>
                         </div>
-                    </div>
-                    <!-- input group -->
-                   </form>
-                   
-       
+                        <!-- end of form group -->
+
+                        <!-- input group -->
+                        <div class="input-group">
+                            <input type="text" class="form-control text-capitalize" id="searchCity"
+                                placeholder="enter city....">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-danger text-capitalize">search</button>
+                            </div>
+                        </div>
+                        <!-- input group -->
+                    </form>
+                    <img src="assets/images/loader.gif" class="loader" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
     <br><br>
     <!-- weather card goes here -->
     <div class="container">

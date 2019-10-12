@@ -114,8 +114,7 @@ function getRestaurandInfo(cityID, categories) {
   });
 }
 
-
-  function displayRestaurant(result) {  
+  function displayRestaurant(result) {
     for (var i = 0; i <= result.length; i++) {
       var outerDiv = $("<div>");
       var divCard1 = $("<div>");
@@ -240,7 +239,7 @@ function getRestaurandInfo(cityID, categories) {
     $("#weather").hide();
     searchForm.addEventListener("submit", event => {
       event.preventDefault();
-
+      $("#restaurant-list").empty();
       //global variables for openweather api
       city = searchCity.value.toLowerCase();
       selectedCategory = parseInt(searchCategory.value);

@@ -111,7 +111,6 @@ function getRestaurandInfo(cityID, categories) {
     var restResult = response.restaurants;
     console.log(restResult);
     displayRestaurant(restResult);
-    hideLoader();
   });
 }
 
@@ -221,6 +220,7 @@ function getRestaurandInfo(cityID, categories) {
       outerDiv.append(divCard1);
       $("#restaurant-list").append(outerDiv);
     }
+    hideLoader();
   }
 
   function showFeedback(text) {

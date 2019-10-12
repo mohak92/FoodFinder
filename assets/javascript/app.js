@@ -56,7 +56,6 @@ function callback(response) {
     console.log("Enter valid city");
     showFeedback("Please enter a valid city !");
   } else {
-    showLoader();
     var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",Burundi&units=imperial&appid=" + apiKeyWeather;
     var queryUrl2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",Burundi&units=imperial&appid=" + apiKeyWeather;
 
@@ -111,7 +110,6 @@ function getRestaurandInfo(cityID, categories) {
     var restResult = response.restaurants;
     console.log(restResult);
     displayRestaurant(restResult);
-    hideLoader();
   });
 }
 
@@ -233,10 +231,9 @@ function getRestaurandInfo(cityID, categories) {
 
   function showLoader() {
     this.loader.classList.add("showItem");
-  }
-
-  function hideLoader() {
-    this.loader.classList.remove("showItem");
+    setTimeout(() => {
+      this.loader.classList.remove("showItem");
+    }, 3000);
   }
 
   $(document).ready(function () {
@@ -244,6 +241,7 @@ function getRestaurandInfo(cityID, categories) {
     $("#weather").hide();
     searchForm.addEventListener("submit", event => {
       event.preventDefault();
+      showLoader();
       $("#restaurant-list").empty();
       //global variables for openweather api
       city = searchCity.value.toLowerCase();

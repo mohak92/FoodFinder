@@ -114,7 +114,6 @@ function getRestaurandInfo(cityID, categories) {
   });
 }
 
-
   function displayRestaurant(result) {
     for (var i = 0; i <= result.length; i++) {
       var outerDiv = $("<div>");
@@ -220,8 +219,8 @@ function getRestaurandInfo(cityID, categories) {
       outerDiv.append(divCard1);
       $("#restaurant-list").append(outerDiv);
     }
+    hideLoader();
   }
-
 
   function showFeedback(text) {
     const feedback = document.querySelector(".feedback");
@@ -245,7 +244,7 @@ function getRestaurandInfo(cityID, categories) {
     $("#weather").hide();
     searchForm.addEventListener("submit", event => {
       event.preventDefault();
-
+      $("#restaurant-list").empty();
       //global variables for openweather api
       city = searchCity.value.toLowerCase();
       selectedCategory = parseInt(searchCategory.value);

@@ -32,6 +32,9 @@ body {
 .feedback {
   display: none;
 }
+.weather-card {
+  display: none;
+}
 .loader {
   margin: 0 auto;
   display: none;
@@ -41,4 +44,7 @@ body {
 }
 .showItem {
   display: block;
+}
+.capitalize {
+  text-transform: capitalize;
 }

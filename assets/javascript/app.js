@@ -4,6 +4,7 @@ var apiKeyWeather = "d593e2d9c9a4edb4bda4173346b7b4e7";
 var city;
 var selectedCategory;
 var loader = document.querySelector(".loader");
+
 function getCategories() {
   const categoryURL = `https://developers.zomato.com/api/v2.1/categories`;
   $.ajax({
@@ -44,16 +45,16 @@ function getCityData(city) {
 
 var cityID;
 function callback(response) {
-  console.log(response.location_suggestions.length);
+  //console.log(response.location_suggestions.length);
   if (response.location_suggestions.length === 0) {
     cityID = 0;
   } else {
     cityID = response.location_suggestions[0].id;
   }
-  console.log(cityID);
-  console.log(city);
+  //console.log(cityID);
+  //console.log(city);
   if (cityID === 0) {
-    console.log("Enter valid city");
+    //console.log("Enter valid city");
     showFeedback("Please enter a valid city !");
   } else {
     var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",Burundi&units=imperial&appid=" + apiKeyWeather;
@@ -67,8 +68,9 @@ function callback(response) {
       .then(function (response) {
         //console.log(response)
 
-        $("#todaysWeather").html(response.main.temp + " Degrees")
-        //console.log(response.main.temp)
+        $("#todaysWeather").html(response.main.temp + " &#8457")
+        console.log(response.main.temp)
+        $(".degree").html(response.main.temp + " &#8457");
 
 
 
@@ -80,16 +82,22 @@ function callback(response) {
     })
 
       .then(function (response) {
-        //console.log(response)
+        console.log(response)
         $("#day1").html(response.list[4].main.temp + " Degrees " + response.list[4].weather[0].main)
         $("#day2").html(response.list[12].main.temp + " Degrees " + response.list[12].weather[0].main)
         $("#day3").html(response.list[20].main.temp + " Degrees " + response.list[20].weather[0].main)
         $("#day4").html(response.list[28].main.temp + " Degrees " + response.list[28].weather[0].main)
         $("#day5").html(response.list[36].main.temp + " Degrees " + response.list[36].weather[0].main)
+        
+        $(".card-title").html(city);
+        $(".card-text").html(response.list[4].weather[0].main);
+        $(".fa-leaf").html(" " + response.list[0].wind.speed + " mi/h Winds")
 
       });
 
-    $("#weather").show();
+    //$("#weather").show();
+    //$(".weather-card").show();
+    showWeather();
     getRestaurandInfo(cityID, selectedCategory);
   }
 }
@@ -108,7 +116,7 @@ function getRestaurandInfo(cityID, categories) {
 
   }).then(function (response) {
     var restResult = response.restaurants;
-    console.log(restResult);
+    //console.log(restResult);
     displayRestaurant(restResult);
   });
 }
@@ -229,6 +237,16 @@ function getRestaurandInfo(cityID, categories) {
     }, 3000);
   }
 
+  function showWeather() {
+    const feedback = document.querySelector(".weather-card");
+    feedback.classList.add("showItem");
+  }
+
+  function hideWeather() {
+    const feedback = document.querySelector(".weather-card");
+    feedback.classList.remove("showItem");
+  }
+
   function showLoader() {
     this.loader.classList.add("showItem");
     setTimeout(() => {
@@ -238,18 +256,20 @@ function getRestaurandInfo(cityID, categories) {
 
   $(document).ready(function () {
     getCategories();
-    $("#weather").hide();
+    //$("#weather").hide();
+    //$(".weather-card").hide();
     searchForm.addEventListener("submit", event => {
       event.preventDefault();
       showLoader();
+      hideWeather();
       $("#restaurant-list").empty();
       //global variables for openweather api
-      city = searchCity.value.toLowerCase();
+      city = searchCity.value.toLowerCase().trim();
       selectedCategory = parseInt(searchCategory.value);
-      console.log(selectedCategory);
-      console.log(city)
+      //console.log(selectedCategory);
+      //console.log(city)
       if (city === "" || selectedCategory === 0) {
-        console.log("show error");
+        //console.log("show error");
         showFeedback("please enter a city and select category");
       } else {
         getCityData(city);

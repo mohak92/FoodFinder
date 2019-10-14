@@ -83,11 +83,11 @@ function callback(response) {
 
       .then(function (response) {
         console.log(response)
-        $("#day1").html(response.list[4].main.temp + " Degrees " + response.list[4].weather[0].main)
-        $("#day2").html(response.list[12].main.temp + " Degrees " + response.list[12].weather[0].main)
-        $("#day3").html(response.list[20].main.temp + " Degrees " + response.list[20].weather[0].main)
-        $("#day4").html(response.list[28].main.temp + " Degrees " + response.list[28].weather[0].main)
-        $("#day5").html(response.list[36].main.temp + " Degrees " + response.list[36].weather[0].main)
+        // $("#day1").html(response.list[4].main.temp + " Degrees " + response.list[4].weather[0].main)
+        // $("#day2").html(response.list[12].main.temp + " Degrees " + response.list[12].weather[0].main)
+        // $("#day3").html(response.list[20].main.temp + " Degrees " + response.list[20].weather[0].main)
+        // $("#day4").html(response.list[28].main.temp + " Degrees " + response.list[28].weather[0].main)
+        // $("#day5").html(response.list[36].main.temp + " Degrees " + response.list[36].weather[0].main)
         
         $(".card-title").html(city);
         $(".card-text").html(response.list[4].weather[0].main);
@@ -102,6 +102,13 @@ function callback(response) {
         + response.list[4].main.temp_min + "&#8457 ");
         $("#dayFiveMax").html(response.list[36].main.temp_max + "&#8457 &#47; " 
         + response.list[4].main.temp_min + "&#8457 ");
+        
+        $("#day1").html(moment(response.list[4].dt_txt).format('dddd'));
+        $("#day2").html(moment(response.list[12].dt_txt).format('dddd'));
+        $("#day3").html(moment(response.list[20].dt_txt).format('dddd'));
+        $("#day4").html(moment(response.list[28].dt_txt).format('dddd'));
+        $("#day5").html(moment(response.list[36].dt_txt).format('dddd'));
+        
 
       });
 

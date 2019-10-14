@@ -104,7 +104,7 @@
                                             <tr>
                                                 <td class="font-weight-normal align-middle">Tuesday</td>
                                                 <td class="float-right font-weight-normal">
-                                                    <p class="mb-1">24&deg;<span class="text-muted">/12&deg;</span></p>
+                                                    <p id="dayOneMax" class="mb-1">24&deg;<span id="dayOneMin" class="text-muted">/12&deg;</span></p>
                                                 </td>
                                                 <td class="float-right mr-3">
                                                     <i class="fas fa-sun fa-lg amber-text"></i>
@@ -113,7 +113,7 @@
                                             <tr>
                                                 <td class="font-weight-normal align-middle">Wednesday</td>
                                                 <td class="float-right font-weight-normal">
-                                                    <p class="mb-1">19&deg;<span class="text-muted">/10&deg;</span></p>
+                                                    <p id="dayTwoMax" class="mb-1">19&deg;<span id="dayTwoMin" class="text-muted">/10&deg;</span></p>
                                                 </td>
                                                 <td class="float-right mr-3">
                                                     <i class="fas fa-cloud-sun-rain fa-lg text-info"></i>
@@ -122,7 +122,7 @@
                                             <tr>
                                                 <td class="font-weight-normal align-middle">Thursday</td>
                                                 <td class="float-right font-weight-normal">
-                                                    <p class="mb-1">23&deg;<span class="text-muted">/15&deg;</span></p>
+                                                    <p id="dayThreeMax" class="mb-1">23&deg;<span id="dayThreeMin" class="text-muted">/15&deg;</span></p>
                                                 </td>
                                                 <td class="float-right mr-3">
                                                     <i class="fas fa-sun fa-lg amber-text"></i>
@@ -131,7 +131,7 @@
                                             <tr>
                                                 <td class="font-weight-normal align-middle">Friday</td>
                                                 <td class="float-right font-weight-normal">
-                                                    <p class="mb-1">26&deg;<span class="text-muted">/19&deg;</span></p>
+                                                    <p id="dayFourMax" class="mb-1">26&deg;<span id="dayFourMin" class="text-muted">/19&deg;</span></p>
                                                 </td>
                                                 <td class="float-right mr-3">
                                                     <i class="fas fa-sun fa-lg amber-text"></i>
@@ -140,19 +140,10 @@
                                             <tr>
                                                 <td class="font-weight-normal align-middle">Saturday</td>
                                                 <td class="float-right font-weight-normal">
-                                                    <p class="mb-1">20&deg;<span class="text-muted">/16&deg;</span></p>
+                                                    <p id="dayFiveMax" class="mb-1">20&deg;<span id="dayFiveMin" class="text-muted">/16&deg;</span></p>
                                                 </td>
                                                 <td class="float-right mr-3">
                                                     <i class="fas fa-cloud fa-lg text-info"></i>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-normal align-middle">Sunday</td>
-                                                <td class="float-right font-weight-normal">
-                                                    <p class="mb-1">22&deg;<span class="text-muted">/13&deg;</span></p>
-                                                </td>
-                                                <td class="float-right mr-3">
-                                                    <i class="fas fa-cloud-sun fa-lg text-info"></i>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -194,6 +185,7 @@
     <!-- bootstrap js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <!-- script js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="assets/javascript/app.js"></script>
 </body>
 

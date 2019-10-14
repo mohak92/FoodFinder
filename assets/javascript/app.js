@@ -92,6 +92,16 @@ function callback(response) {
         $(".card-title").html(city);
         $(".card-text").html(response.list[4].weather[0].main);
         $(".fa-leaf").html(" " + response.list[0].wind.speed + " mi/h Winds")
+        $("#dayOneMax").html(response.list[4].main.temp_max + "&#8457 &#47; " 
+        + response.list[4].main.temp_min + "&#8457 ");
+        $("#dayTwoMax").html(response.list[12].main.temp_max + "&#8457 &#47; " 
+        + response.list[4].main.temp_min + "&#8457 ");
+        $("#dayThreeMax").html(response.list[20].main.temp_max + "&#8457 &#47; " 
+        + response.list[4].main.temp_min + "&#8457 ");
+        $("#dayFourMax").html(response.list[28].main.temp_max + "&#8457 &#47; " 
+        + response.list[4].main.temp_min + "&#8457 ");
+        $("#dayFiveMax").html(response.list[36].main.temp_max + "&#8457 &#47; " 
+        + response.list[4].main.temp_min + "&#8457 ");
 
       });
 
@@ -226,6 +236,7 @@ function getRestaurandInfo(cityID, categories) {
       outerDiv.append(divCard1);
       $("#restaurant-list").append(outerDiv);
     }
+    hideLoader();
   }
 
   function showFeedback(text) {

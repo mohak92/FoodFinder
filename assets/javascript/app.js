@@ -109,6 +109,42 @@ function callback(response) {
         $("#day4").html(moment(response.list[28].dt_txt).format('dddd'));
         $("#day5").html(moment(response.list[36].dt_txt).format('dddd'));
         
+        if(response.list[4].weather[0].main === "Clouds"){
+          $("#dayOneIcon").addClass("fa-cloud")
+        } else if(response.list[4].weather[0].main === "Clear"){
+          $("#dayOneIcon").addClass("fa-sun")
+        } else if(response.list[4].weather[0].main === "Rain"){
+          $("#dayOneIcon").addClass("fa-cloud-sun-rain")
+        } 
+        if(response.list[12].weather[0].main === "Clouds"){
+          $("#dayTwoIcon").addClass("fa-cloud")
+        } else if(response.list[12].weather[0].main === "Clear"){
+          $("#dayTwoIcon").addClass("fa-sun")
+        } else if(response.list[12].weather[0].main === "Rain"){
+          $("#dayTwoIcon").addClass("fa-cloud-sun-rain")
+        } 
+        if(response.list[20].weather[0].main === "Clouds"){
+          $("#dayThreeIcon").addClass("fa-cloud")
+        } else if(response.list[20].weather[0].main === "Clear"){
+          $("#dayThreeIcon").addClass("fa-sun")
+        } else if(response.list[20].weather[0].main === "Rain"){
+          $("#dayThreeIcon").addClass("fa-cloud-sun-rain")
+        } 
+        if(response.list[28].weather[0].main === "Clouds"){
+          $("#dayFourIcon").addClass("fa-cloud")
+        } else if(response.list[28].weather[0].main === "Clear"){
+          $("#dayFourIcon").addClass("fa-sun")
+        } else if(response.list[28].weather[0].main === "Rain"){
+          $("#dayFourIcon").addClass("fa-cloud-sun-rain")
+        } 
+        if(response.list[36].weather[0].main === "Clouds"){
+          $("#dayFiveIcon").addClass("fa-cloud")
+        } else if(response.list[36].weather[0].main === "Clear"){
+          $("#dayFiveIcon").addClass("fa-sun")
+        } else if(response.list[36].weather[0].main === "Rain"){
+          $("#dayFiveIcon").addClass("fa-cloud-sun-rain")
+        }
+
 
       });
 

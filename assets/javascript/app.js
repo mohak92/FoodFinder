@@ -169,7 +169,7 @@ function getRestaurandInfo(cityID, categories) {
 
   }).then(function (response) {
     var restResult = response.restaurants;
-    //console.log(restResult);
+    console.log(restResult);
     displayRestaurant(restResult);
   });
 }
@@ -212,7 +212,11 @@ function getRestaurandInfo(cityID, categories) {
       divRowP3.addClass("row p-3");
       divCol5.addClass("col-5");
       myImg.addClass("mg-fluid img-thumbnail");
-      myImg.attr("src", result[i].restaurant.thumb);
+      if ( result[i].restaurant.thumb === ""){
+        myImg.attr("src", "assets/images/cardimage.png");
+      } else{
+        myImg.attr("src", result[i].restaurant.thumb);
+      }
       myImg.attr("alt", "");
       divCol5TextCap.addClass("col-5 text-capitalize");
       h6.addClass("text-uppercase pt-2 redText");

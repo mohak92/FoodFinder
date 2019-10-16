@@ -3,6 +3,8 @@ var apiKey = "0490112252c7a9dead536c20b8c14c10";
 var apiKeyWeather = "d593e2d9c9a4edb4bda4173346b7b4e7";
 var city;
 var selectedCategory;
+var latitude;
+var longitude;
 var loader = document.querySelector(".loader");
 
 function getCategories() {
@@ -61,6 +63,77 @@ function weatherIcon(day, weather) {
   }
 }
 
+function getCurrentLocationWeather(currLatitude, currLongitude) {
+  var queryUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + currLatitude + "&lon=" + currLongitude + "&units=imperial&appid=" + apiKeyWeather;
+  var queryUrl2 = "https://api.openweathermap.org/data/2.5/forecast?lat=" + currLatitude + "&lon=" + currLongitude + "&units=imperial&appid=" + apiKeyWeather;
+
+  $.ajax({
+    url: queryUrl,
+    method: "GET"
+  })
+
+    .then(function (response) {
+      //console.log(response)
+
+      $("#todaysWeather").html(response.main.temp + " &#8457")
+      console.log(response.main.temp)
+      $(".degree").html(response.main.temp + " &#8457");
+
+
+
+    });
+
+  $.ajax({
+    url: queryUrl2,
+    method: "GET"
+  })
+
+    .then(function (response) {
+      console.log(response)
+      // $("#day1").html(response.list[4].main.temp + " Degrees " + response.list[4].weather[0].main)
+      // $("#day2").html(response.list[12].main.temp + " Degrees " + response.list[12].weather[0].main)
+      // $("#day3").html(response.list[20].main.temp + " Degrees " + response.list[20].weather[0].main)
+      // $("#day4").html(response.list[28].main.temp + " Degrees " + response.list[28].weather[0].main)
+      // $("#day5").html(response.list[36].main.temp + " Degrees " + response.list[36].weather[0].main)
+
+      $(".card-title").html(response.city.name);
+      $(".card-text").html(response.list[0].weather[0].main);
+      $(".fa-leaf").html(" " + response.list[0].wind.speed + " mi/h Winds")
+      $("#dayOneMax").html(response.list[4].main.temp_max + "&#8457 &#47; "
+        + response.list[4].main.temp_min + "&#8457 ");
+      $("#dayTwoMax").html(response.list[12].main.temp_max + "&#8457 &#47; "
+        + response.list[4].main.temp_min + "&#8457 ");
+      $("#dayThreeMax").html(response.list[20].main.temp_max + "&#8457 &#47; "
+        + response.list[4].main.temp_min + "&#8457 ");
+      $("#dayFourMax").html(response.list[28].main.temp_max + "&#8457 &#47; "
+        + response.list[4].main.temp_min + "&#8457 ");
+      $("#dayFiveMax").html(response.list[36].main.temp_max + "&#8457 &#47; "
+        + response.list[4].main.temp_min + "&#8457 ");
+
+      $("#day1").html(moment(response.list[4].dt_txt).format('dddd'));
+      $("#day2").html(moment(response.list[12].dt_txt).format('dddd'));
+      $("#day3").html(moment(response.list[20].dt_txt).format('dddd'));
+      $("#day4").html(moment(response.list[28].dt_txt).format('dddd'));
+      $("#day5").html(moment(response.list[36].dt_txt).format('dddd'));
+
+      var dayOneWeather = response.list[4].weather[0].main;
+      var dayTwoWeather = response.list[12].weather[0].main
+      var dayThreeWeather = response.list[20].weather[0].main
+      var dayFourWeather = response.list[28].weather[0].main
+      var dayFiveWeather = response.list[36].weather[0].main
+
+      var days = [{ day: "#dayOneIcon", weather: dayOneWeather },
+      { day: "#dayTwoIcon", weather: dayTwoWeather },
+      { day: "#dayThreeIcon", weather: dayThreeWeather },
+      { day: "#dayFourIcon", weather: dayFourWeather },
+      { day: "#dayFiveIcon", weather: dayFiveWeather }];
+      days.forEach(day => weatherIcon(day.day, day.weather))
+
+      showWeather();
+    });
+
+}
+
 
 var cityID;
 function callback(response) {
@@ -109,7 +182,7 @@ function callback(response) {
         // $("#day5").html(response.list[36].main.temp + " Degrees " + response.list[36].weather[0].main)
 
         $(".card-title").html(city);
-        $(".card-text").html(response.list[4].weather[0].main);
+        $(".card-text").html(response.list[0].weather[0].main);
         $(".fa-leaf").html(" " + response.list[0].wind.speed + " mi/h Winds")
         $("#dayOneMax").html(response.list[4].main.temp_max + "&#8457 &#47; "
           + response.list[4].main.temp_min + "&#8457 ");
@@ -141,46 +214,6 @@ function callback(response) {
         { day: "#dayFiveIcon", weather: dayFiveWeather }];
         days.forEach(day => weatherIcon(day.day, day.weather))
 
-        // }
-        // if (response.list[4].weather[0].main === "Clouds") {
-        //   $("#dayOneIcon").addClass("fa-cloud")
-        // } else if (response.list[4].weather[0].main === "Clear") {
-        //   $("#dayOneIcon").addClass("fa-sun")
-        // } else if (response.list[4].weather[0].main === "Rain") {
-        //   $("#dayOneIcon").addClass("fa-cloud-sun-rain")
-        // }
-        // if (response.list[12].weather[0].main === "Clouds") {
-        //   $("#dayTwoIcon").addClass("fa-cloud")
-        // } else if (response.list[12].weather[0].main === "Clear") {
-        //   $("#dayTwoIcon").addClass("fa-sun")
-        // } else if (response.list[12].weather[0].main === "Rain") {
-        //   $("#dayTwoIcon").addClass("fa-cloud-sun-rain")
-        // }
-        // if (response.list[20].weather[0].main === "Clouds") {
-        //   $("#dayThreeIcon").addClass("fa-cloud")
-        // } else if (response.list[20].weather[0].main === "Clear") {
-        //   $("#dayThreeIcon").addClass("fa-sun")
-        // } else if (response.list[20].weather[0].main === "Rain") {
-        //   $("#dayThreeIcon").addClass("fa-cloud-sun-rain")
-        // }
-        //   if (response.list[28].weather[0].main === "Clouds") {
-        //     $("#dayFourIcon").addClass("fa-cloud")
-        //   } else if (response.list[28].weather[0].main === "Clear") {
-        //     $("#dayFourIcon").addClass("fa-sun")
-        //   } else if (response.list[28].weather[0].main === "Rain") {
-        //     $("#dayFourIcon").addClass("fa-cloud-sun-rain")
-        //   }
-        //   if (response.list[36].weather[0].main === "Clouds") {
-        //     $("#dayFiveIcon").addClass("fa-cloud")
-        //   } else if (response.list[36].weather[0].main === "Clear") {
-        //     $("#dayFiveIcon").addClass("fa-sun")
-        //   } else if (response.list[36].weather[0].main === "Rain") {
-        //     $("#dayFiveIcon").addClass("fa-cloud-sun-rain")
-        //   }
-        // });
-
-        //$("#weather").show();
-        //$(".weather-card").show();
         showWeather();
         getRestaurandInfo(cityID, selectedCategory);
       });
@@ -344,8 +377,30 @@ function showLoader() {
   }, 3000);
 }
 
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    console.log();
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+async function showPosition(position) {
+  latitude = await position.coords.latitude;
+  longitude = await position.coords.longitude;
+  if ((latitude !== undefined || latitude !== "")
+    && (longitude !== undefined || longitude !== "")) {
+    console.log("call weather api to get weather of current location");
+    console.log("Latitude: " + latitude);
+    console.log("Longitude: " + longitude);
+    getCurrentLocationWeather(latitude, longitude);
+  }
+}
+
 $(document).ready(function () {
   getCategories();
+  getLocation();
   //$("#weather").hide();
   //$(".weather-card").hide();
   searchForm.addEventListener("submit", event => {

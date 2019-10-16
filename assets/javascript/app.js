@@ -81,7 +81,7 @@ function getCurrentLocationWeather(currLatitude, currLongitude) {
 
       $("#todaysWeather").html(response.main.temp + " &#8457")
       if(response.weather[0].main === "Clear"){
-        if(response.main.temp >= 80){
+        if(response.main.temp >= 80.00){
           $("#recommendation").html("We recommend: "+ clearArrayWarmWeather[Math.floor(Math.random() * clearArrayWarmWeather.length)]);
         } else {
           $("#recommendation").html("We recommend: "+ clearArray[Math.floor(Math.random() * clearArray.length)]);

@@ -43,7 +43,7 @@ function getCityData(city) {
   });
 }
 
-function weatherIcon(day, weather){
+function weatherIcon(day, weather) {
   switch (weather) {
     case "Clouds":
       $(day).addClass("fa-cloud");
@@ -54,7 +54,7 @@ function weatherIcon(day, weather){
     case "Rain":
       $(day).addClass("fa-cloud-sun-rain");
       break;
-      default: 
+    default:
       console.log("Weather Not Found");
 
 
@@ -127,18 +127,18 @@ function callback(response) {
         $("#day3").html(moment(response.list[20].dt_txt).format('dddd'));
         $("#day4").html(moment(response.list[28].dt_txt).format('dddd'));
         $("#day5").html(moment(response.list[36].dt_txt).format('dddd'));
-        
+
         var dayOneWeather = response.list[4].weather[0].main;
         var dayTwoWeather = response.list[12].weather[0].main
         var dayThreeWeather = response.list[20].weather[0].main
         var dayFourWeather = response.list[28].weather[0].main
         var dayFiveWeather = response.list[36].weather[0].main
-        
-        var days = [{day: "#dayOneIcon", weather: dayOneWeather},
-        {day: "#dayTwoIcon", weather: dayTwoWeather}, 
-        {day: "#dayThreeIcon", weather: dayThreeWeather}, 
-        {day: "#dayFourIcon", weather: dayFourWeather},
-        {day: "#dayFiveIcon", weather: dayFiveWeather}];
+
+        var days = [{ day: "#dayOneIcon", weather: dayOneWeather },
+        { day: "#dayTwoIcon", weather: dayTwoWeather },
+        { day: "#dayThreeIcon", weather: dayThreeWeather },
+        { day: "#dayFourIcon", weather: dayFourWeather },
+        { day: "#dayFiveIcon", weather: dayFiveWeather }];
         days.forEach(day => weatherIcon(day.day, day.weather))
 
         // }
@@ -163,26 +163,27 @@ function callback(response) {
         // } else if (response.list[20].weather[0].main === "Rain") {
         //   $("#dayThreeIcon").addClass("fa-cloud-sun-rain")
         // }
-      //   if (response.list[28].weather[0].main === "Clouds") {
-      //     $("#dayFourIcon").addClass("fa-cloud")
-      //   } else if (response.list[28].weather[0].main === "Clear") {
-      //     $("#dayFourIcon").addClass("fa-sun")
-      //   } else if (response.list[28].weather[0].main === "Rain") {
-      //     $("#dayFourIcon").addClass("fa-cloud-sun-rain")
-      //   }
-      //   if (response.list[36].weather[0].main === "Clouds") {
-      //     $("#dayFiveIcon").addClass("fa-cloud")
-      //   } else if (response.list[36].weather[0].main === "Clear") {
-      //     $("#dayFiveIcon").addClass("fa-sun")
-      //   } else if (response.list[36].weather[0].main === "Rain") {
-      //     $("#dayFiveIcon").addClass("fa-cloud-sun-rain")
-      //   }
-      // });
+        //   if (response.list[28].weather[0].main === "Clouds") {
+        //     $("#dayFourIcon").addClass("fa-cloud")
+        //   } else if (response.list[28].weather[0].main === "Clear") {
+        //     $("#dayFourIcon").addClass("fa-sun")
+        //   } else if (response.list[28].weather[0].main === "Rain") {
+        //     $("#dayFourIcon").addClass("fa-cloud-sun-rain")
+        //   }
+        //   if (response.list[36].weather[0].main === "Clouds") {
+        //     $("#dayFiveIcon").addClass("fa-cloud")
+        //   } else if (response.list[36].weather[0].main === "Clear") {
+        //     $("#dayFiveIcon").addClass("fa-sun")
+        //   } else if (response.list[36].weather[0].main === "Rain") {
+        //     $("#dayFiveIcon").addClass("fa-cloud-sun-rain")
+        //   }
+        // });
 
-    //$("#weather").show();
-    //$(".weather-card").show();
-    showWeather();
-    getRestaurandInfo(cityID, selectedCategory);
+        //$("#weather").show();
+        //$(".weather-card").show();
+        showWeather();
+        getRestaurandInfo(cityID, selectedCategory);
+      });
   }
 }
 
@@ -365,6 +366,3 @@ $(document).ready(function () {
     }
   })
 });
-
-
-

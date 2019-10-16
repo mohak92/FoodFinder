@@ -6,6 +6,10 @@ var selectedCategory;
 var latitude;
 var longitude;
 var loader = document.querySelector(".loader");
+var rainArray = ["Order soup", "Delivery", "Order Chinese Food", "Pizza Delivery", "Search Cafes for Tea"];
+var clearArray = ["Dine-Out", "Go to a Pub or Bar", "Club & Lounges"];
+var clearArrayWarmWeather = ["Weather  is good for outdoor seating", "Have Ice Cream", "Forzen Yogurt"]
+var cloudArray = ["English Breakfast", "Ramen", "Italian food"];
 
 function getCategories() {
   const categoryURL = `https://developers.zomato.com/api/v2.1/categories`;
@@ -76,7 +80,17 @@ function getCurrentLocationWeather(currLatitude, currLongitude) {
       //console.log(response)
 
       $("#todaysWeather").html(response.main.temp + " &#8457")
-      console.log(response.main.temp)
+      if(response.weather[0].main === "Clear"){
+        if(response.main.temp >= 80){
+          $("#recommendation").html("We recommend: "+ clearArrayWarmWeather[Math.floor(Math.random() * clearArrayWarmWeather.length)]);
+        } else {
+          $("#recommendation").html("We recommend: "+ clearArray[Math.floor(Math.random() * clearArray.length)]);
+        }
+      } else if(response.weather[0].main == "Rain") {
+        $("#recommendation").html("We recommend: "+ rainArray[Math.floor(Math.random() * rainArray.length)]);
+      } else if(response.weather[0].main === "Clouds") {
+        $("#recommendation").html("We recommend: "+ cloudArray[Math.floor(Math.random() * cloudArray.length)]);
+      }
       $(".degree").html(response.main.temp + " &#8457");
 
 
@@ -162,6 +176,17 @@ function callback(response) {
 
         $("#todaysWeather").html(response.main.temp + " &#8457")
         console.log(response.main.temp)
+        if(response.weather[0].main === "Clear"){
+          if(response.main.temp >= 80){
+            $("#recommendation").html("We recommend: "+ clearArrayWarmWeather[Math.floor(Math.random() * clearArrayWarmWeather.length)]);
+          } else {
+            $("#recommendation").html("We recommend: "+ clearArray[Math.floor(Math.random() * clearArray.length)]);
+          }
+        } else if(response.weather[0].main == "Rain") {
+          $("#recommendation").html("We recommend: "+ rainArray[Math.floor(Math.random() * rainArray.length)]);
+        } else if(response.weather[0].main === "Clouds") {
+          $("#recommendation").html("We recommend: "+ cloudArray[Math.floor(Math.random() * cloudArray.length)]);
+        }
         $(".degree").html(response.main.temp + " &#8457");
 
 
@@ -398,6 +423,7 @@ async function showPosition(position) {
 }
 
 $(document).ready(function () {
+  showLoader();
   getCategories();
   getLocation();
   //$("#weather").hide();

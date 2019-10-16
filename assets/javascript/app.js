@@ -348,7 +348,6 @@ function displayRestaurant(result) {
     outerDiv.append(divCard1);
     $("#restaurant-list").append(outerDiv);
   }
-  hideLoader();
 }
 
 function showFeedback(text) {

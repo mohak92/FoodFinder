@@ -1,5 +1,5 @@
 # Food Mood
-<a href="https://mohak92.github.io/Project-1/">Click here</a> to check our application.
+<a href="https://mohak92.github.io/FoodFinder/">Click here</a> to check our application.
 
 Make your next dining experience a breeze. 
 Better choices based on weather which is scientifically proven to effect our mood. 

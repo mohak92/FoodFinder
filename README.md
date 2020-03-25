@@ -22,3 +22,10 @@ How it works:
   2. Open index.html in a modern web browser such as chrome or safari.
  
  <strong>Environment:</strong> HTML, CSS, JavaScript ES6, jQuery, Ajax
+
+## Contributors
+* Mohak Tamhane - [mohak92](https://github.com/mohak92)
+* Shehryar Ehtesham -[Shehryare](https://github.com/Shehryare)
+* Steven Cainn - [stevencainn](https://github.com/stevencainn)
+* Hanna Rafael - [hannarafael](https://github.com/hannarafael)
+* Akolade Oke - [Akoladeolu03](https://github.com/Akoladeolu03)

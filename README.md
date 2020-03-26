@@ -16,7 +16,8 @@ How it works:
  6. Results are sorted by rating, provide information such as Outdoor seating, cost for 2, address, menu and website
  
  ## Screenshots
- 
+ ![](assets/images/1.png)
+ ![](assets/images/2.png)
  ## Local Setup
   1.Clone the repository.
   2. Open index.html in a modern web browser such as chrome or safari.
